@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   EMI Calculator | FiNNGUARD Capital
+  </title>
+  <!-- Fonts & Styles -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="css/style_with_emi.css" rel="stylesheet"/>
+  <!-- Favicon -->
+  <link href="assets/favicon.ico" rel="icon" type="image/x-icon"/>
+  <!-- Google Analytics -->
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-FH17RVPD5Y">
+  </script>
+  <script>
+   window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-FH17RVPD5Y');
+  </script>
+  <style>
+   .tooltip {
+      display: inline-block;
+      position: relative;
+      cursor: help;
+    }
+    .tooltip::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      left: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #002244;
+      color: #fff;
+      padding: 6px 10px;
+      font-size: 0.75rem;
+      border-radius: 4px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      margin-left: 8px;
+      z-index: 10;
+    }
+    .tooltip:hover::after {
+      opacity: 1;
+    }
+    .share-btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 12px 24px;
+      background-color: #25d366;
+      color: white;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    .share-btn:hover {
+      background-color: #1da851;
+      transform: translateY(-2px);
+    }
+    .disclaimer {
+      margin-top: 30px;
+      font-size: 0.85rem;
+      color: #666;
+      line-height: 1.4;
+      text-align: center;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .share-options {
+      margin-top: 10px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+    .hidden-form {
+      display: none;
+      margin-top: 20px;
+      background: #f5f5f5;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hidden-form input {
+      padding: 10px;
+      margin-bottom: 10px;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-family: inherit;
+    }
+    .hidden-form button {
+      padding: 10px 20px;
+      font-weight: bold;
+      background-color: #002244;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+ </head>
+ <body>
+  <header>
+   <img alt="FiNNGUARD Capital" class="logo" src="assets/logo.png"/>
+   <nav>
+    <a href="index.html">
+     Home
+    </a>
+    <a href="about.html">
+     About Us
+    </a>
+    <a href="emi.html">
+     EMI Calculator
+    </a>
+    <a href="enquiry.html">
+     Loan Enquiry
+    </a>
+    <a href="contact.html">
+     Contact
+    </a>
+   </nav>
+  </header>
+  <section class="emi-calculator-section">
+   <h2>
+    EMI Calculator
+   </h2>
+   <div class="emi-calculator">
+    <div class="calculator-container">
+     <div class="calculator-inputs">
+      <div class="input-group">
+       <label for="loan-amount">
+        Loan Amount (₹)
+       </label>
+       <input class="range-slider" id="loan-amount" max="5000000" min="10000" step="10000" type="range" value="1000000"/>
+       <div class="value-display">
+        ₹
+        <span id="loan-amount-value">
+         10,00,000
+        </span>
+       </div>
+      </div>
+      <div class="input-group">
+       <label for="interest-rate">
+        Interest Rate (% per annum)
+        <span class="tooltip" data-tooltip="Annual interest rate charged on the loan">
+         ⓘ
+        </span>
+       </label>
+       <input class="range-slider" id="interest-rate" max="20" min="1" step="0.1" type="range" value="8.5"/>
+       <div class="value-display">
+        <span id="interest-rate-value">
+         8.5
+        </span>
+        %
+       </div>
+      </div>
+      <div class="input-group">
+       <label for="loan-tenure">
+        Loan Tenure (Years)
+        <span class="tooltip" data-tooltip="Number of years over which the loan will be repaid">
+         ⓘ
+        </span>
+       </label>
+       <input class="range-slider" id="loan-tenure" max="30" min="1" step="1" type="range" value="15"/>
+       <div class="value-display">
+        <span id="loan-tenure-value">
+         15
+        </span>
+        Years
+       </div>
+      </div>
+      <div class="input-group">
+       <label for="loan-type">
+        Loan Type
+       </label>
+       <select id="loan-type">
+        <option value="personal">
+         Personal Loan
+        </option>
+        <option value="home">
+         Home Loan
+        </option>
+        <option value="car">
+         Car Loan
+        </option>
+        <option value="business">
+         Business Loan
+        </option>
+        <option value="property">
+         Loan Against Property
+        </option>
+       </select>
+      </div>
+     </div>
+     <div class="calculator-results">
+      <div class="result-card">
+       <div class="result-title">
+        Monthly EMI
+       </div>
+       <div class="result-value" id="emi-value">
+        ₹ 9,845
+       </div>
+      </div>
+      <div class="result-card">
+       <div class="result-title">
+        Total Payment
+       </div>
+       <div class="result-value" id="total-payment">
+        ₹ 17,72,100
+       </div>
+      </div>
+      <div class="result-card">
+       <div class="result-title">
+        Total Interest
+       </div>
+       <div class="result-value" id="total-interest">
+        ₹ 7,72,100
+       </div>
+      </div>
+      <div class="share-options">
+       <a class="share-btn" href="#" id="whatsapp-share" target="_blank">
+        📤 WhatsApp
+       </a>
+       <a class="share-btn" href="#" id="email-share" style="background:#0072c6;">
+        📧 Email
+       </a>
+       <a class="share-btn" href="#" id="sms-share" style="background:#444;">
+        📱 SMS
+       </a>
+      </div>
+     </div>
+    </div>
+    <div class="hidden-form" id="lead-form">
+     <h4>
+      Before Sharing, Tell Us About You:
+     </h4>
+     <input id="lead-name" placeholder="Your Name (required)" required="" type="text"/>
+     <input id="lead-contact" placeholder="Mobile Number or Email (required)" required="" type="text"/>
+     <button id="submit-lead">
+      Continue to Share
+     </button>
+    </div>
+    <p class="disclaimer">
+     Disclaimer: The EMI calculator is for indicative purposes only. Actual EMI, interest, and tenure will be based on your lender's terms and approval conditions.
+    </p>
+   </div>
+  </section>
+  <script>
+   document.addEventListener('DOMContentLoaded', function () {
+      const loanAmountSlider = document.getElementById('loan-amount');
+      const interestRateSlider = document.getElementById('interest-rate');
+      const loanTenureSlider = document.getElementById('loan-tenure');
+      const loanAmountValue = document.getElementById('loan-amount-value');
+      const interestRateValue = document.getElementById('interest-rate-value');
+      const loanTenureValue = document.getElementById('loan-tenure-value');
+      const loanTypeSelect = document.getElementById('loan-type');
+
+      const emiValue = document.getElementById('emi-value');
+      const totalPayment = document.getElementById('total-payment');
+      const totalInterest = document.getElementById('total-interest');
+
+      const leadForm = document.getElementById('lead-form');
+      const leadName = document.getElementById('lead-name');
+      const leadContact = document.getElementById('lead-contact');
+      const submitLeadBtn = document.getElementById('submit-lead');
+
+      const shareBtns = {
+        whatsapp: document.getElementById('whatsapp-share'),
+        email: document.getElementById('email-share'),
+        sms: document.getElementById('sms-share')
+      };
+
+      const formatter = new Intl.NumberFormat('en-IN', {
+        style: 'currency',
+        currency: 'INR',
+        minimumFractionDigits: 0
+      });
+
+      const presets = {
+        personal: { interest: 12, tenure: 3 },
+        home: { interest: 8.5, tenure: 20 },
+        car: { interest: 9, tenure: 5 },
+        business: { interest: 13, tenure: 4 },
+        property: { interest: 10, tenure: 10 }
+      };
+
+      let shareMethod = null;
+
+      function updateSliderValues() {
+        loanAmountValue.textContent = formatter.format(loanAmountSlider.value).replace('₹', '');
+        interestRateValue.textContent = interestRateSlider.value;
+        loanTenureValue.textContent = loanTenureSlider.value;
+        calculateEMI();
+      }
+
+      function calculateEMI() {
+        const principal = parseFloat(loanAmountSlider.value);
+        const rate = parseFloat(interestRateSlider.value) / 100 / 12;
+        const time = parseFloat(loanTenureSlider.value) * 12;
+        const emi = principal * rate * Math.pow(1 + rate, time) / (Math.pow(1 + rate, time) - 1);
+        const total = emi * time;
+        const interest = total - principal;
+
+        emiValue.textContent = formatter.format(emi);
+        totalPayment.textContent = formatter.format(total);
+        totalInterest.textContent = formatter.format(interest);
+
+        const loanType = loanTypeSelect.options[loanTypeSelect.selectedIndex].text;
+        const msg =
+          `🏦 *FiNNGUARD Capital – EMI Estimate* 💰
+
+` +
+          `📌 *Loan Type:* ${loanType}
+` +
+          `💵 *Loan Amount:* ₹${principal.toLocaleString()}
+` +
+          `📈 *Interest Rate:* ${interestRateSlider.value}% p.a.
+` +
+          `⏳ *Tenure:* ${loanTenureSlider.value} years
+
+` +
+          `💸 *EMI:* ${formatter.format(emi)}
+` +
+          `💰 *Total Payment:* ${formatter.format(total)}
+` +
+          `💥 *Interest Payable:* ${formatter.format(interest)}
+
+` +
+          `🔗 Try your own calculation: https://www.finnguardcapital.com/emi.html`;
+
+        shareBtns.whatsapp.setAttribute('data-msg', msg);
+        shareBtns.email.setAttribute('data-msg', msg);
+        shareBtns.sms.setAttribute('data-msg', msg);
+      }
+
+      Object.keys(shareBtns).forEach(method => {
+        shareBtns[method].addEventListener('click', function (e) {
+          e.preventDefault();
+          shareMethod = method;
+          leadForm.style.display = 'block';
+        });
+      });
+
+      submitLeadBtn.addEventListener('click', function () {
+        if (!leadName.value.trim() || !leadContact.value.trim()) {
+          alert("Please fill in Name and Contact.");
+          return;
+        }
+
+        const msg = shareBtns[shareMethod].getAttribute('data-msg');
+        console.log(`Lead Captured → Name: ${leadName.value}, Contact: ${leadContact.value}, Method: ${shareMethod}`);
+
+        if (shareMethod === 'whatsapp') {
+          window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+        } else if (shareMethod === 'email') {
+          window.location.href = `mailto:?subject=EMI Estimate from FiNNGUARD&body=${encodeURIComponent(msg)}`;
+        } else if (shareMethod === 'sms') {
+          window.location.href = `sms:?body=${encodeURIComponent(msg)}`;
+        }
+
+        leadForm.style.display = 'none';
+      });
+
+      loanAmountSlider.addEventListener('input', updateSliderValues);
+      interestRateSlider.addEventListener('input', updateSliderValues);
+      loanTenureSlider.addEventListener('input', updateSliderValues);
+
+      loanTypeSelect.addEventListener('change', function () {
+        const type = loanTypeSelect.value;
+        if (presets[type]) {
+          interestRateSlider.value = presets[type].interest;
+          loanTenureSlider.value = presets[type].tenure;
+          updateSliderValues();
+        }
+      });
+
+      updateSliderValues();
+    });
+  </script>
+  <!-- Footer -->
+  <footer>
+   <p>
+    &copy; 2025 FiNNGUARD CAPITAL |
+    <a href="https://www.finnguardcapital.com">
+     www.finnguardcapital.com
+    </a>
+    |
+    <a href="legal.html">
+     Terms &amp; Privacy
+    </a>
+   </p>
+  </footer>
+ </body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Loan Enquiry | FiNNGUARD Capital
+  </title>
+  <!-- Fonts & Main Stylesheet -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet"/>
+  <link href="css/style.css" rel="stylesheet">
+   <!-- Favicon -->
+   <link href="assets/favicon.ico" rel="icon" type="image/x-icon"/>
+   <!-- Google Analytics -->
+   <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-FH17RVPD5Y">
+   </script>
+   <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-FH17RVPD5Y');
+   </script>
+   <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 30px;
+      background-color: #ffffff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    }
+
+    .logo {
+      height: 50px;
+    }
+
+    nav a {
+      margin: 0 15px;
+      color: #002244;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #0055aa;
+    }
+
+    .enquiry-form-section {
+      padding: 40px 20px;
+      max-width: 600px;
+      margin: 40px auto;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    .enquiry-form-section h2 {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #002244;
+    }
+
+    .enquiry-form-section p.subtext {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #444;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    select {
+      background-color: #fff;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      background-color: #002244;
+      color: #fff;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #003366;
+    }
+
+    .consent-box {
+      display: flex;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+
+    .consent-box input {
+      margin-right: 10px;
+    }
+
+    .disclaimer {
+      font-size: 0.85rem;
+      color: #555;
+      margin-top: 10px;
+      margin-bottom: 5px;
+    }
+
+    .privacy-note {
+      font-size: 0.82rem;
+      color: #777;
+      text-align: left;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .privacy-note::before {
+      content: "🔒";
+    }
+
+    footer {
+      margin-top: 60px;
+      text-align: center;
+      padding: 20px;
+      background-color: #002244;
+      color: #fff;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav {
+        margin-top: 10px;
+      }
+      nav a {
+        display: block;
+        margin: 5px 0;
+      }
+    }
+   </style>
+  </link>
+ </head>
+ <body>
+  <!-- Header -->
+  <header>
+   <img alt="FiNNGUARD Capital" class="logo" src="assets/logo.png"/>
+   <nav>
+    <a href="index.html">
+     Home
+    </a>
+    <a href="about.html">
+     About Us
+    </a>
+    <a href="emi.html">
+     EMI Calculator
+    </a>
+    <a href="enquiry.html">
+     Loan Enquiry
+    </a>
+    <a href="contact.html">
+     Contact
+    </a>
+   </nav>
+  </header>
+  <!-- Loan Enquiry Form -->
+  <section class="enquiry-form-section">
+   <h2>
+    Loan Enquiry
+   </h2>
+   <p class="subtext">
+    Fill out this quick form and our team will get back to you with personalized loan options.
+   </p>
+   <form action="https://formspree.io/f/xgvyqpvj" method="POST">
+    <div class="form-group">
+     <input name="name" placeholder="Full Name" required="" type="text"/>
+    </div>
+    <div class="form-group">
+     <input name="phone" placeholder="Phone Number" required="" type="tel"/>
+    </div>
+    <div class="form-group">
+     <input name="email" placeholder="Email Address" required="" type="email"/>
+    </div>
+    <div class="form-group">
+     <select name="loan-type" required="">
+      <option value="">
+       Select Loan Type
+      </option>
+      <option value="personal">
+       Personal Loan
+      </option>
+      <option value="home">
+       Home Loan
+      </option>
+      <option value="car">
+       Car Loan
+      </option>
+      <option value="business">
+       Business Loan
+      </option>
+      <option value="property">
+       Loan Against Property
+      </option>
+     </select>
+    </div>
+    <div class="form-group">
+     <input name="amount" placeholder="Desired Loan Amount (₹)" required="" type="number"/>
+    </div>
+    <div class="consent-box">
+     <input id="consent" name="consent" required="" type="checkbox"/>
+     <label for="consent">
+      I agree to
+      <a href="legal.html" target="_blank">
+       Terms &amp; Privacy Policy
+      </a>
+     </label>
+    </div>
+    <p class="disclaimer">
+     Loans subject to partner bank approval per RBI guidelines
+    </p>
+    <p class="privacy-note">
+     Your details are safe with us. We never share your information.
+    </p>
+    <button class="btn" type="submit">
+     Submit Enquiry
+    </button>
+   </form>
+  </section>
+  <!-- Footer -->
+  <footer>
+   <p>
+    &copy; 2025 FiNNGUARD CAPITAL |
+    <a href="https://www.finnguardcapital.com">
+     www.finnguardcapital.com
+    </a>
+    |
+    <a href="legal.html">
+     Terms &amp; Privacy
+    </a>
+   </p>
+  </footer>
+ </body>
+</html>
