@@ -36,16 +36,29 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 5%;
+  flex-wrap: wrap;              /* ✅ allows wrapping on small screens */
+  padding: 1rem 5%;             /* ✅ responsive horizontal padding */
   background: white;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   position: sticky;
   top: 0;
   z-index: 100;
+  min-height: 60px;             /* ✅ ensures space at higher zoom */
 }
 
 .logo {
-  height: 50px;
+  height: auto;                 /* ✅ allow responsive scaling */
+  max-height: 50px;             /* ✅ limits large growth */
+  width: auto;
+  max-width: 160px;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;              /* ✅ keeps nav links from overflowing */
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5rem;
 }
 
 nav a {
@@ -53,6 +66,7 @@ nav a {
   font-weight: 500;
   transition: color 0.3s;
   position: relative;
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);  /* ✅ responsive font size */
 }
 
 nav a:hover {
