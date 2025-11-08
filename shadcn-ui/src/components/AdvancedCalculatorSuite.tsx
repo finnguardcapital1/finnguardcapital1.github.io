@@ -23,6 +23,15 @@ interface CalculationResult {
   recommendation?: string;
 }
 
+interface ShareCalculationResult {
+  emi?: number;
+  totalAmount?: number;
+  totalInterest?: number;
+  maxLoanAmount?: number;
+  affordability?: string;
+  recommendation?: string;
+}
+
 export default function AdvancedCalculatorSuite() {
   const [activeTab, setActiveTab] = useState('emi');
   
@@ -191,7 +200,7 @@ export default function AdvancedCalculatorSuite() {
     };
   };
 
-  const shareCalculation = (type: string, result: any) => {
+  const shareCalculation = (type: string, result: ShareCalculationResult) => {
     let message = '';
     
     switch (type) {
@@ -202,9 +211,9 @@ Loan Amount: ₹${parseFloat(emiData.amount).toLocaleString()}
 Interest Rate: ${emiData.rate}%
 Tenure: ${emiData.tenure} months
 
-Monthly EMI: ₹${result.emi.toLocaleString()}
-Total Amount: ₹${result.totalAmount.toLocaleString()}
-Total Interest: ₹${result.totalInterest.toLocaleString()}
+Monthly EMI: ₹${result.emi?.toLocaleString()}
+Total Amount: ₹${result.totalAmount?.toLocaleString()}
+Total Interest: ₹${result.totalInterest?.toLocaleString()}
 
 Get the best loan rates with FiNNGUARD Capital!`;
         break;
@@ -213,8 +222,8 @@ Get the best loan rates with FiNNGUARD Capital!`;
         message = `🏠 Loan Affordability Assessment - FiNNGUARD Capital
 
 Monthly Income: ₹${affordabilityData.income}
-Max Eligible EMI: ₹${result.emi.toLocaleString()}
-Max Loan Amount: ₹${result.maxLoanAmount.toLocaleString()}
+Max Eligible EMI: ₹${result.emi?.toLocaleString()}
+Max Loan Amount: ₹${result.maxLoanAmount?.toLocaleString()}
 Affordability: ${result.affordability}
 
 ${result.recommendation}

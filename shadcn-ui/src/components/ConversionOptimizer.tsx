@@ -10,7 +10,7 @@ import { Phone, Mail, MessageCircle, Calendar, Clock, CheckCircle, TrendingUp } 
 interface ConversionEvent {
   type: 'whatsapp' | 'callback' | 'email' | 'form_submit';
   timestamp: string;
-  data: any;
+  data: Record<string, unknown>;
   variant?: string;
 }
 
@@ -23,18 +23,34 @@ interface ABTestVariant {
   weight: number;
 }
 
+interface CallbackData {
+  name: string;
+  phone: string;
+  preferredTime: string;
+  loanType: string;
+  urgency: string;
+}
+
+interface EmailData {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+  loanType: string;
+}
+
 export default function ConversionOptimizer() {
   const [selectedVariant, setSelectedVariant] = useState<ABTestVariant | null>(null);
   const [showCallbackForm, setShowCallbackForm] = useState(false);
   const [showEmailForm, setShowEmailForm] = useState(false);
-  const [callbackData, setCallbackData] = useState({
+  const [callbackData, setCallbackData] = useState<CallbackData>({
     name: '',
     phone: '',
     preferredTime: '',
     loanType: '',
     urgency: 'medium'
   });
-  const [emailData, setEmailData] = useState({
+  const [emailData, setEmailData] = useState<EmailData>({
     name: '',
     email: '',
     subject: '',

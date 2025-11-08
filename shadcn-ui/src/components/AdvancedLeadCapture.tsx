@@ -42,6 +42,12 @@ interface LeadScore {
   factors: string[];
 }
 
+interface LeadInfo extends LeadData {
+  leadScore: LeadScore;
+  timestamp: string;
+  source: string;
+}
+
 export default function AdvancedLeadCapture() {
   const [currentStep, setCurrentStep] = useState(1);
   const [leadData, setLeadData] = useState<LeadData>({
@@ -129,7 +135,7 @@ export default function AdvancedLeadCapture() {
 
   const handleSubmit = () => {
     // Prepare comprehensive lead data
-    const leadInfo = {
+    const leadInfo: LeadInfo = {
       ...leadData,
       leadScore,
       timestamp: new Date().toISOString(),
@@ -181,7 +187,7 @@ Priority: ${leadScore.category} Lead - Handle accordingly!`;
     triggerFollowUpSequence(leadInfo);
   };
 
-  const triggerFollowUpSequence = (leadInfo: any) => {
+  const triggerFollowUpSequence = (leadInfo: LeadInfo) => {
     // Placeholder for automated follow-up system
     console.log('Follow-up sequence triggered for:', leadInfo);
     
