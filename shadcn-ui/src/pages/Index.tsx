@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ArrowRight, CheckCircle, Phone, Mail, MapPin, MessageCircle, Shield, Calculator } from 'lucide-react';
+import { ArrowRight, CheckCircle, Phone, Mail, MapPin, MessageCircle, Calculator } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Testimonials from '@/components/Testimonials';
@@ -77,10 +77,6 @@ export default function Index() {
   const handleWhatsAppContact = () => {
     const message = "Hi FiNNGUARD Capital! I'm interested in learning more about your loan services. Please provide me with more information.";
     window.open(`https://web.whatsapp.com/send?phone=919497544143&text=${encodeURIComponent(message)}`, '_blank');
-  };
-
-  const handleCheckEligibility = () => {
-    navigate('/credit-eligibility');
   };
 
   const handleEMICalculator = () => {
@@ -201,7 +197,6 @@ export default function Index() {
               <Link to="/" className="text-slate-700 hover:text-yellow-600 font-medium transition-colors" aria-current="page">Home</Link>
               <Link to="/about" className="text-slate-700 hover:text-yellow-600 font-medium transition-colors">About Us</Link>
               <Link to="/emi-calculator" className="text-slate-700 hover:text-yellow-600 font-medium transition-colors">EMI Calculator</Link>
-              <Link to="/credit-eligibility" className="text-slate-700 hover:text-yellow-600 font-medium transition-colors">Credit Eligibility</Link>
               <Link to="/contact" className="text-slate-700 hover:text-yellow-600 font-medium transition-colors">Contact</Link>
             </nav>
             <Button onClick={handleWhatsAppContact} className="bg-green-500 hover:bg-green-600 text-white">
@@ -234,14 +229,6 @@ export default function Index() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-800">
               <Button 
                 size="lg" 
-                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3"
-                onClick={handleCheckEligibility}
-              >
-                <Shield className="ml-2 w-5 h-5 mr-2" />
-                Check Eligibility
-              </Button>
-              <Button 
-                size="lg" 
                 className="bg-yellow-500 hover:bg-yellow-600 text-slate-900 font-semibold px-8 py-3"
                 onClick={handleEMICalculator}
               >
@@ -255,40 +242,6 @@ export default function Index() {
                 onClick={handleWhatsAppContact}
               >
                 Apply Now
-              </Button>
-            </div>
-          </div>
-        </section>
-
-        {/* New Credit Eligibility CTA */}
-        <section className="py-16 px-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
-          <div className="container mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-4">Check Your Loan Eligibility in Minutes</h2>
-            <p className="text-xl mb-6 text-blue-100">
-              AI-powered credit assessment with instant pre-approval
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <div className="flex items-center gap-2 text-blue-100">
-                <Shield className="w-5 h-5" />
-                <span>Secure & DPDP Compliant</span>
-              </div>
-              <div className="flex items-center gap-2 text-blue-100">
-                <CheckCircle className="w-5 h-5" />
-                <span>Instant Results</span>
-              </div>
-              <div className="flex items-center gap-2 text-blue-100">
-                <MessageCircle className="w-5 h-5" />
-                <span>AI Assistant Guided</span>
-              </div>
-            </div>
-            <div className="mt-8">
-              <Button 
-                size="lg" 
-                className="bg-white text-blue-600 hover:bg-blue-50 font-semibold px-8 py-3"
-                onClick={handleCheckEligibility}
-              >
-                Start Eligibility Check
-                <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </div>
           </div>
@@ -407,7 +360,7 @@ export default function Index() {
           <div className="container mx-auto">
             <div className="grid md:grid-cols-3 gap-8">
               <div>
-                <img src="/assets/logo.png" alt="FiNNGUARD Capital Logo" className="h-12 mb-4" />
+                <img src="/assets/logo_variant_1.png" alt="FiNNGUARD Capital Logo" className="h-12 mb-4" />
                 <p className="text-slate-300 mb-4">Your Financial Goals, Our Commitment</p>
               </div>
               <div>
@@ -416,7 +369,6 @@ export default function Index() {
                   <Link to="/" className="block text-slate-300 hover:text-yellow-400 transition-colors">Home</Link>
                   <Link to="/about" className="block text-slate-300 hover:text-yellow-400 transition-colors">About Us</Link>
                   <Link to="/emi-calculator" className="block text-slate-300 hover:text-yellow-400 transition-colors">EMI Calculator</Link>
-                  <Link to="/credit-eligibility" className="block text-slate-300 hover:text-yellow-400 transition-colors">Credit Eligibility</Link>
                   <Link to="/contact" className="block text-slate-300 hover:text-yellow-400 transition-colors">Contact</Link>
                 </nav>
               </div>

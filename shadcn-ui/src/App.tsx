@@ -6,7 +6,6 @@ import { HelmetProvider } from 'react-helmet-async';
 import Index from './pages/Index';
 import About from './pages/About';
 import EMICalculator from './pages/EMICalculator';
-import CreditEligibility from './pages/CreditEligibility';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
 
@@ -22,7 +21,6 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<About />} />
             <Route path="/emi-calculator" element={<EMICalculator />} />
-            <Route path="/credit-eligibility" element={<CreditEligibility />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
