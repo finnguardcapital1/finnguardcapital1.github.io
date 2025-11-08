@@ -15,33 +15,33 @@ import ConversionOptimizer from '@/components/ConversionOptimizer';
 const loanProducts = [
   {
     title: 'Business Loan',
-    image: '/assets/businessloan.png',
     description: 'Fuel your business growth with competitive rates',
-    rate: 'Starting from 10.5%'
+    rate: 'Starting from 10.5%',
+    features: ['Quick Processing', 'Flexible Tenure', 'Minimal Documentation']
   },
   {
     title: 'Home Loan',
-    image: '/assets/homeloan.png',
     description: 'Make your dream home a reality',
-    rate: 'Starting from 8.5%'
+    rate: 'Starting from 8.5%',
+    features: ['Low Interest Rates', 'Long Tenure Options', 'Easy EMI']
   },
   {
     title: 'Car Loan',
-    image: '/assets/Carloan.jpg',
     description: 'Drive your dream car today',
-    rate: 'Starting from 9.0%'
+    rate: 'Starting from 9.0%',
+    features: ['Fast Approval', 'Competitive Rates', 'No Hidden Charges']
   },
   {
     title: 'Personal Loan',
-    image: '/assets/personalloan.png',
     description: 'Quick funds for personal needs',
-    rate: 'Starting from 11.5%'
+    rate: 'Starting from 11.5%',
+    features: ['Instant Approval', 'No Collateral', 'Flexible Repayment']
   },
   {
     title: 'Loan Against Property',
-    image: '/assets/loanagainstproperty.png',
     description: 'Unlock the value of your property',
-    rate: 'Starting from 9.5%'
+    rate: 'Starting from 9.5%',
+    features: ['High Loan Amount', 'Lower Interest', 'Tax Benefits']
   }
 ];
 
@@ -250,57 +250,50 @@ export default function Index() {
         {/* Statistics Dashboard */}
         <StatsDashboard />
 
-        {/* Loan Products Carousel */}
+        {/* Loan Products Cards */}
         <section className="py-16 px-4" aria-labelledby="loan-products-heading">
           <div className="container mx-auto">
             <h2 id="loan-products-heading" className="text-4xl font-bold text-center text-slate-800 mb-12">Our Loan Products</h2>
             <div className="relative max-w-7xl mx-auto">
-              <Card className="overflow-hidden shadow-2xl">
-                <CardContent className="p-0">
-                  <div className="relative h-[600px] sm:h-[550px] md:h-[500px] lg:h-[450px]">
-                    {loanProducts.map((product, index) => (
-                      <div
-                        key={index}
-                        className={`absolute inset-0 transition-opacity duration-1000 ${
-                          index === currentSlide ? 'opacity-100' : 'opacity-0'
-                        }`}
-                      >
-                        <div className="flex flex-col lg:flex-row h-full">
-                          <div className="lg:w-3/5 h-80 sm:h-96 lg:h-full relative overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100">
-                            <img 
-                              src={product.image} 
-                              alt={`${product.title} - ${product.description}`}
-                              className="w-full h-full object-cover"
-                              loading={index === 0 ? "eager" : "lazy"}
-                              style={{ 
-                                objectFit: 'cover',
-                                objectPosition: 'center center'
-                              }}
-                            />
+              <div className="min-h-[400px]">
+                {loanProducts.map((product, index) => (
+                  <div
+                    key={index}
+                    className={`transition-opacity duration-1000 ${
+                      index === currentSlide ? 'opacity-100' : 'opacity-0 absolute inset-0'
+                    }`}
+                  >
+                    <Card className="overflow-hidden shadow-2xl bg-gradient-to-br from-slate-800 to-slate-900 text-white">
+                      <CardContent className="p-8 md:p-12">
+                        <div className="text-center space-y-6">
+                          <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">{product.title}</h3>
+                          <p className="text-lg md:text-xl lg:text-2xl text-slate-200 leading-relaxed max-w-2xl mx-auto">{product.description}</p>
+                          <Badge className="bg-yellow-500 text-slate-900 text-lg font-semibold px-6 py-3">
+                            {product.rate}
+                          </Badge>
+                          
+                          {/* Features */}
+                          <div className="flex flex-wrap justify-center gap-4 mt-6">
+                            {product.features.map((feature, idx) => (
+                              <Badge key={idx} variant="outline" className="text-white border-white/30 px-4 py-2">
+                                {feature}
+                              </Badge>
+                            ))}
                           </div>
                           
-                          <div className="lg:w-2/5 p-6 sm:p-8 lg:p-10 flex flex-col justify-center bg-gradient-to-br from-slate-800 to-slate-900 text-white">
-                            <div className="space-y-4 lg:space-y-6">
-                              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight">{product.title}</h3>
-                              <p className="text-base sm:text-lg lg:text-xl text-slate-200 leading-relaxed">{product.description}</p>
-                              <Badge className="bg-yellow-500 text-slate-900 w-fit text-sm sm:text-base font-semibold px-4 py-2">
-                                {product.rate}
-                              </Badge>
-                              <div className="pt-2">
-                                <Link to="/contact">
-                                  <Button className="bg-yellow-500 hover:bg-yellow-600 text-slate-900 font-semibold text-sm sm:text-base px-6 py-2 sm:px-8 sm:py-3 transition-all duration-200 hover:scale-105">
-                                    Apply Now <ArrowRight className="ml-2 w-4 h-4" />
-                                  </Button>
-                                </Link>
-                              </div>
-                            </div>
+                          <div className="pt-4">
+                            <Link to="/contact">
+                              <Button className="bg-yellow-500 hover:bg-yellow-600 text-slate-900 font-semibold text-lg px-8 py-3 transition-all duration-200 hover:scale-105">
+                                Apply Now <ArrowRight className="ml-2 w-5 h-5" />
+                              </Button>
+                            </Link>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      </CardContent>
+                    </Card>
                   </div>
-                </CardContent>
-              </Card>
+                ))}
+              </div>
               
               <div className="flex justify-center mt-6 space-x-3" role="tablist" aria-label="Loan product slides">
                 {loanProducts.map((product, index) => (
