@@ -227,8 +227,8 @@ export default function CreditEligibility() {
       const requestedAmount = parseFloat(quickCheckData.loanAmount) || 0;
       const creditScoreRange = quickCheckData.creditScore;
       
-      // Updated FOIR calculation to 70%
-      const foirLimit = quickCheckData.employmentType === 'Salaried' ? 0.70 : 0.65;
+      // FOIR calculation
+      const foirLimit = quickCheckData.employmentType === 'Salaried' ? 0.40 : 0.35;
       const maxEMI = income * foirLimit;
       
       // Estimate interest rate based on credit score
@@ -429,8 +429,8 @@ export default function CreditEligibility() {
       const obligations = parseFloat(applicantData.financialInfo.monthlyObligations) || 0;
       const requestedAmount = parseFloat(applicantData.financialInfo.loanAmount) || 0;
       
-      // Updated FOIR calculation to 70%
-      const foirLimit = applicantData.employmentInfo.type === 'Salaried' ? 0.70 : 0.65;
+      // FOIR calculation
+      const foirLimit = applicantData.employmentInfo.type === 'Salaried' ? 0.40 : 0.35;
       const maxEMI = income * foirLimit - obligations;
       
       const rate = 0.085 / 12;
@@ -590,7 +590,7 @@ Please contact me to proceed with the loan application.`;
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
-                    <span className="text-sm">70% FOIR calculation</span>
+                    <span className="text-sm">Basic eligibility estimate</span>
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
@@ -628,7 +628,7 @@ Please contact me to proceed with the loan application.`;
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
-                    <span className="text-sm">Comprehensive 70% FOIR analysis</span>
+                    <span className="text-sm">Comprehensive FOIR analysis</span>
                   </li>
                   <li className="flex items-center">
                     <Star className="w-4 h-4 text-yellow-500 mr-2" />
@@ -660,7 +660,7 @@ Please contact me to proceed with the loan application.`;
         <div className="space-y-6">
           <div className="text-center">
             <h2 className="text-2xl font-bold text-slate-800 mb-4">Quick Eligibility Check</h2>
-            <p className="text-slate-600">Get instant preliminary results with 70% FOIR calculation</p>
+            <p className="text-slate-600">Get instant preliminary results in 2 minutes</p>
           </div>
 
           {renderErrorAlert()}
@@ -718,9 +718,9 @@ Please contact me to proceed with the loan application.`;
                     <SelectValue placeholder="Select employment type" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="Salaried">👔 Salaried (70% FOIR)</SelectItem>
-                    <SelectItem value="Self-Employed">💼 Self-Employed (65% FOIR)</SelectItem>
-                    <SelectItem value="Business Owner">🏢 Business Owner (65% FOIR)</SelectItem>
+                    <SelectItem value="Salaried">👔 Salaried</SelectItem>
+                    <SelectItem value="Self-Employed">💼 Self-Employed</SelectItem>
+                    <SelectItem value="Business Owner">🏢 Business Owner</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -991,9 +991,9 @@ Please contact me to proceed with the loan application.`;
                         <SelectValue placeholder="Select employment type" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="Salaried">👔 Salaried (70% FOIR)</SelectItem>
-                        <SelectItem value="Self-Employed">💼 Self-Employed (65% FOIR)</SelectItem>
-                        <SelectItem value="Business Owner">🏢 Business Owner (65% FOIR)</SelectItem>
+                        <SelectItem value="Salaried">👔 Salaried</SelectItem>
+                        <SelectItem value="Self-Employed">💼 Self-Employed</SelectItem>
+                        <SelectItem value="Business Owner">🏢 Business Owner</SelectItem>
                       </SelectContent>
                     </Select>
                     {applicantData.employmentInfo.type && (
@@ -1197,7 +1197,7 @@ Please contact me to proceed with the loan application.`;
           <div className="space-y-6">
             <div className="text-center">
               <h2 className="text-2xl font-bold text-slate-800 mb-4">FOIR & Eligibility Calculation</h2>
-              <p className="text-slate-600">Calculating your loan eligibility with enhanced 70% FOIR</p>
+              <p className="text-slate-600">Calculating your loan eligibility based on income and obligations</p>
             </div>
 
             {renderErrorAlert()}
@@ -1224,7 +1224,7 @@ Please contact me to proceed with the loan application.`;
                       </div>
                       <div className="flex justify-between">
                         <span>FOIR Limit:</span>
-                        <span className="font-semibold text-green-600">{applicantData.employmentInfo.type === 'Salaried' ? '70%' : '65%'}</span>
+                        <span className="font-semibold">{applicantData.employmentInfo.type === 'Salaried' ? '40%' : '35%'}</span>
                       </div>
                     </div>
                   </div>
@@ -1271,7 +1271,7 @@ Please contact me to proceed with the loan application.`;
                 {assessmentType === 'quick' ? 'Quick Check Result' : 'Tentative Eligibility Result'}
               </h2>
               <p className="text-slate-600">
-                {assessmentType === 'quick' ? 'Preliminary assessment with 70% FOIR calculation' : 'Based on your comprehensive income and obligations analysis'}
+                {assessmentType === 'quick' ? 'Preliminary assessment based on basic information' : 'Based on your income and obligations analysis'}
               </p>
             </div>
 
@@ -1301,7 +1301,7 @@ Please contact me to proceed with the loan application.`;
                        'Not Eligible'}
                     </h3>
                     <p className="text-slate-600">
-                      {eligibilityResult.status === 'eligible' ? 'Your loan application has high approval chances with our enhanced 70% FOIR calculation' :
+                      {eligibilityResult.status === 'eligible' ? 'Your loan application has high approval chances' :
                        eligibilityResult.status === 'conditionally_eligible' ? 'Your loan may be approved with modified terms' :
                        'Your current profile does not meet eligibility criteria'}
                     </p>
@@ -1344,7 +1344,7 @@ Please contact me to proceed with the loan application.`;
                       <div className="space-y-3">
                         <div className="flex justify-between">
                           <span>FOIR:</span>
-                          <span className={`font-semibold ${eligibilityResult.foir <= 70 ? 'text-green-600' : 'text-red-600'}`}>
+                          <span className={`font-semibold ${eligibilityResult.foir <= 40 ? 'text-green-600' : 'text-red-600'}`}>
                             {eligibilityResult.foir}%
                           </span>
                         </div>
@@ -1461,7 +1461,7 @@ Please contact me to proceed with the loan application.`;
     <>
       <Helmet>
         <title>Credit Eligibility Assessment - FiNNGUARD Capital</title>
-        <meta name="description" content="Check your loan eligibility instantly with FiNNGUARD's AI-powered credit assessment system. Enhanced 70% FOIR calculation for better eligibility." />
+        <meta name="description" content="Check your loan eligibility instantly with FiNNGUARD's AI-powered credit assessment system. Get pre-approved in minutes." />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
@@ -1469,7 +1469,7 @@ Please contact me to proceed with the loan application.`;
         <header className="bg-white shadow-lg sticky top-0 z-50">
           <div className="container mx-auto px-4 py-4 flex justify-between items-center">
             <div className="flex items-center space-x-3">
-              <img src="/assets/logo.png" alt="FiNNGUARD Capital" className="h-12" />
+              <img src="/assets/logo_variant_2.png" alt="FiNNGUARD Capital" className="h-12" />
             </div>
             <nav className="hidden md:flex space-x-8">
               <Link to="/" className="text-slate-700 hover:text-yellow-600 font-medium transition-colors">Home</Link>
@@ -1552,7 +1552,7 @@ Please contact me to proceed with the loan application.`;
           <div className="container mx-auto">
             <div className="grid md:grid-cols-3 gap-8">
               <div>
-                <img src="/assets/logo_variant_1.png" alt="FiNNGUARD Capital" className="h-12 mb-4" />
+                <img src="/assets/logo_variant_3.png" alt="FiNNGUARD Capital" className="h-12 mb-4" />
                 <p className="text-slate-300 mb-4">Your Financial Goals, Our Commitment</p>
               </div>
               <div>

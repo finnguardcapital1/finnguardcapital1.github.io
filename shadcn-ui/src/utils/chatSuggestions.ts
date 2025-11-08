@@ -5,6 +5,11 @@ export interface SuggestionButton {
   icon?: string;
 }
 
+interface SuggestionContext {
+  loanType?: string;
+  [key: string]: unknown;
+}
+
 // Loan type suggestions
 export const loanTypeSuggestions: SuggestionButton[] = [
   { text: '🏠 Home Loan', value: 'Home Purchase' },
@@ -113,7 +118,7 @@ export const experienceSuggestions: SuggestionButton[] = [
 ];
 
 // Function to get suggestions based on field type
-export const getSuggestionsForField = (field: string, context?: any): SuggestionButton[] => {
+export const getSuggestionsForField = (field: string, context?: SuggestionContext): SuggestionButton[] => {
   switch (field) {
     case 'loanPurpose':
       return loanTypeSuggestions;
