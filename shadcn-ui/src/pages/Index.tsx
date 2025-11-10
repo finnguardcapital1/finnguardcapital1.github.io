@@ -9,8 +9,10 @@ import Testimonials from '@/components/Testimonials';
 import FAQ from '@/components/FAQ';
 import DocumentChecklist from '@/components/DocumentChecklist';
 import LiveChat from '@/components/LiveChat';
-import StatsDashboard from '@/components/StatsDashboard';
 import ConversionOptimizer from '@/components/ConversionOptimizer';
+import { LazyStatsDashboard, OptimizedImage } from '@/components/PerformanceOptimizer';
+import { trackPageView, trackWhatsAppClick, trackEvent } from '@/lib/analytics';
+import ErrorBoundary from '@/components/ErrorBoundary';
 
 const loanProducts = [
   {
@@ -68,6 +70,8 @@ export default function Index() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    trackPageView('/', 'Home - FiNNGUARD Capital');
+    
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % loanProducts.length);
     }, 4000);
@@ -75,12 +79,19 @@ export default function Index() {
   }, []);
 
   const handleWhatsAppContact = () => {
+    trackWhatsAppClick('header_button');
     const message = "Hi FiNNGUARD Capital! I'm interested in learning more about your loan services. Please provide me with more information.";
     window.open(`https://web.whatsapp.com/send?phone=919497544143&text=${encodeURIComponent(message)}`, '_blank');
   };
 
   const handleEMICalculator = () => {
+    trackEvent('button_click', 'navigation', 'emi_calculator_hero');
     navigate('/emi-calculator');
+  };
+
+  const handleApplyNow = () => {
+    trackEvent('button_click', 'cta', 'apply_now_hero');
+    handleWhatsAppContact();
   };
 
   return (
@@ -108,6 +119,10 @@ export default function Index() {
         
         {/* Canonical URL */}
         <link rel="canonical" href="https://finnguardcapital.com" />
+        
+        {/* Preload critical resources */}
+        <link rel="preload" href="/assets/herobanner_variant_1.png" as="image" />
+        <link rel="preload" href="/assets/logo.png" as="image" />
         
         {/* Structured Data - Organization */}
         <script type="application/ld+json">
@@ -191,7 +206,13 @@ export default function Index() {
         <header className="bg-white shadow-lg sticky top-0 z-50">
           <div className="container mx-auto px-4 py-4 flex justify-between items-center">
             <div className="flex items-center space-x-3">
-              <img src="/assets/logo.png" alt="FiNNGUARD Capital - Professional Loan Services Provider" className="h-12" />
+              <OptimizedImage 
+                src="/assets/logo_variant_1.png" 
+                alt="FiNNGUARD Capital - Professional Loan Services Provider" 
+                className="h-12"
+                width={48}
+                height={48}
+              />
             </div>
             <nav className="hidden md:flex space-x-8" role="navigation" aria-label="Main navigation">
               <Link to="/" className="text-slate-700 hover:text-yellow-600 font-medium transition-colors" aria-current="page">Home</Link>
@@ -215,7 +236,13 @@ export default function Index() {
           ></div>
           <div className="relative z-10 container mx-auto">
             <div className="mb-8 animate-in fade-in slide-in-from-bottom-8 duration-1000">
-              <img src="/assets/logo-alt.png" alt="FiNNGUARD Capital Logo" className="h-20 mx-auto mb-6" />
+              <OptimizedImage 
+                src="/assets/logo-alt.png" 
+                alt="FiNNGUARD Capital Logo" 
+                className="h-20 mx-auto mb-6"
+                width={80}
+                height={80}
+              />
             </div>
             <h1 className="text-5xl md:text-6xl font-bold text-black mb-6 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
               Your Trusted Finance Partner
@@ -239,7 +266,7 @@ export default function Index() {
                 size="lg" 
                 variant="outline" 
                 className="border-slate-800 text-slate-800 hover:bg-slate-800 hover:text-white px-8 py-3"
-                onClick={handleWhatsAppContact}
+                onClick={handleApplyNow}
               >
                 Apply Now
               </Button>
@@ -247,8 +274,10 @@ export default function Index() {
           </div>
         </section>
 
-        {/* Statistics Dashboard */}
-        <StatsDashboard />
+        {/* Statistics Dashboard with Error Boundary */}
+        <ErrorBoundary fallback={<div className="py-16 text-center">Loading statistics...</div>}>
+          <LazyStatsDashboard />
+        </ErrorBoundary>
 
         {/* Loan Products Cards */}
         <section className="py-16 px-4" aria-labelledby="loan-products-heading">
@@ -283,7 +312,10 @@ export default function Index() {
                           
                           <div className="pt-4">
                             <Link to="/contact">
-                              <Button className="bg-yellow-500 hover:bg-yellow-600 text-slate-900 font-semibold text-lg px-8 py-3 transition-all duration-200 hover:scale-105">
+                              <Button 
+                                className="bg-yellow-500 hover:bg-yellow-600 text-slate-900 font-semibold text-lg px-8 py-3 transition-all duration-200 hover:scale-105"
+                                onClick={() => trackEvent('button_click', 'cta', `apply_now_${product.title.toLowerCase().replace(' ', '_')}`)}
+                              >
                                 Apply Now <ArrowRight className="ml-2 w-5 h-5" />
                               </Button>
                             </Link>
@@ -299,7 +331,10 @@ export default function Index() {
                 {loanProducts.map((product, index) => (
                   <button
                     key={index}
-                    onClick={() => setCurrentSlide(index)}
+                    onClick={() => {
+                      setCurrentSlide(index);
+                      trackEvent('carousel_navigation', 'interaction', product.title);
+                    }}
                     className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-all duration-200 ${
                       index === currentSlide 
                         ? 'bg-yellow-500 scale-125' 
@@ -333,9 +368,17 @@ export default function Index() {
           </div>
         </section>
 
-        <DocumentChecklist />
-        <Testimonials />
-        <FAQ />
+        <ErrorBoundary>
+          <DocumentChecklist />
+        </ErrorBoundary>
+
+        <ErrorBoundary>
+          <Testimonials />
+        </ErrorBoundary>
+
+        <ErrorBoundary>
+          <FAQ />
+        </ErrorBoundary>
 
         {/* Enhanced CTA Section with Conversion Optimizer */}
         <section className="py-16 px-4 bg-gradient-to-r from-slate-800 to-slate-900 text-white">
@@ -343,8 +386,9 @@ export default function Index() {
             <h2 className="text-4xl font-bold mb-6">Ready to Get Started?</h2>
             <p className="text-xl mb-8 text-slate-200">Contact us today for personalized loan solutions</p>
             
-            {/* Integration Point: ConversionOptimizer replaces basic CTAs */}
-            <ConversionOptimizer />
+            <ErrorBoundary>
+              <ConversionOptimizer />
+            </ErrorBoundary>
           </div>
         </section>
 
@@ -353,7 +397,13 @@ export default function Index() {
           <div className="container mx-auto">
             <div className="grid md:grid-cols-3 gap-8">
               <div>
-                <img src="/assets/logo_variant_1.png" alt="FiNNGUARD Capital Logo" className="h-12 mb-4" />
+                <OptimizedImage 
+                  src="/assets/logo_variant_2.png" 
+                  alt="FiNNGUARD Capital Logo" 
+                  className="h-12 mb-4"
+                  width={48}
+                  height={48}
+                />
                 <p className="text-slate-300 mb-4">Your Financial Goals, Our Commitment</p>
               </div>
               <div>
@@ -395,7 +445,9 @@ export default function Index() {
           </div>
         </footer>
 
-        <LiveChat />
+        <ErrorBoundary>
+          <LiveChat />
+        </ErrorBoundary>
       </div>
     </>
   );
