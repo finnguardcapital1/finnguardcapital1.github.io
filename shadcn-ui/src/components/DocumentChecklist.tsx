@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { CheckCircle, Circle, FileText, Download, MessageCircle } from 'lucide-react';
+import { openWhatsApp } from '@/lib/contact';
 
 const documentChecklists = {
   home: {
@@ -187,8 +188,7 @@ Completion: ${completionPercentage}%
 
 Please guide me on the next steps.`;
 
-    // Fixed WhatsApp Web URL format for pre-filled messages
-    window.open(`https://web.whatsapp.com/send?phone=919497544143&text=${encodeURIComponent(message)}`, '_blank');
+    openWhatsApp(message);
   };
 
   return (

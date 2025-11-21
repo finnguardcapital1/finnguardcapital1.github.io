@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Phone, Mail, MapPin, Clock, MessageCircle } from 'lucide-react';
+import { openWhatsApp } from '@/lib/contact';
 import { useState } from 'react';
 
 export default function ContactSection() {
@@ -17,7 +18,7 @@ export default function ContactSection() {
 
   const handleWhatsAppContact = () => {
     const message = "Hi FiNNGUARD Capital! I'm interested in learning more about your loan services. Please provide me with more information.";
-    window.open(`https://web.whatsapp.com/send?phone=919497544143&text=${encodeURIComponent(message)}`, '_blank');
+    openWhatsApp(message);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -32,7 +33,7 @@ Message: ${formData.message}
 
 Please contact me regarding loan services.`;
     
-    window.open(`https://web.whatsapp.com/send?phone=919497544143&text=${encodeURIComponent(whatsappMessage)}`, '_blank');
+    openWhatsApp(whatsappMessage);
   };
 
   return (

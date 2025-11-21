@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import { SITE_URL, SUPPORT_EMAIL } from '@/config/site';
 
 interface SEOHeadProps {
   title?: string;
@@ -14,7 +15,7 @@ export default function SEOHead({
   title = "FiNNGUARD Capital - Your Trusted Finance Partner | Best Loan Services in Thrissur, Kerala",
   description = "FiNNGUARD Capital offers competitive home loans, car loans, personal loans, and business loans in Thrissur, Kerala. Quick approval, low interest rates starting from 8.5%. Apply now!",
   keywords = "loans Thrissur, home loan Kerala, car loan Thrissur, personal loan, business loan, loan against property, FiNNGUARD Capital, finance company Kerala, loan services Thrissur, EMI calculator",
-  canonical = "https://www.finnguardcapital.com",
+  canonical = SITE_URL,
   ogImage = "/assets/herobanner.png",
   ogType = "website",
   structuredData
@@ -24,11 +25,11 @@ export default function SEOHead({
     "@type": "FinancialService",
     "name": "FiNNGUARD Capital",
     "description": "Leading financial services company offering home loans, car loans, personal loans, and business loans in Thrissur, Kerala",
-    "url": "https://www.finnguardcapital.com",
-    "logo": "https://www.finnguardcapital.com/assets/logo.png",
-    "image": "https://www.finnguardcapital.com/assets/herobanner.png",
+    "url": SITE_URL,
+    "logo": `${SITE_URL}/assets/logo.png`,
+    "image": `${SITE_URL}/assets/herobanner.png`,
     "telephone": "+91-94975-44143",
-    "email": "support@finnguardcapital.com",
+    "email": SUPPORT_EMAIL,
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "17/557E, 2nd Floor, Jayamohan Building, Palappilly Road",
@@ -106,6 +107,8 @@ export default function SEOHead({
       <meta name="keywords" content={keywords} />
       <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
       <meta name="author" content="FiNNGUARD Capital" />
+      {/* Facebook domain verification for Business Manager */}
+      <meta name="facebook-domain-verification" content="5k8gq3vvk7dgnkwxke9huog36vk386" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       <meta name="language" content="English" />

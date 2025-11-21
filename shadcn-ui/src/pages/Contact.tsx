@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { MapPin, Phone, Mail, Clock, MessageCircle, Send, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { openWhatsApp, telHref, TEL_NUMBER } from '@/lib/contact';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -32,12 +33,12 @@ Message: ${formData.message}
 Please contact me regarding loan services.`;
 
     const encodedMessage = encodeURIComponent(whatsappMessage);
-    window.open(`https://wa.me/919497544143?text=${encodedMessage}`, '_blank');
+    openWhatsApp(whatsappMessage);
   };
 
   const handleWhatsAppContact = () => {
     const message = "Hi FiNNGUARD Capital! I'm interested in learning more about your loan services. Please provide me with more information.";
-    window.open(`https://web.whatsapp.com/send?phone=919497544143&text=${encodeURIComponent(message)}`, '_blank');
+    openWhatsApp(message);
   };
 
   return (
@@ -59,7 +60,6 @@ Please contact me regarding loan services.`;
               <Link to="/" className="text-slate-700 hover:text-yellow-600 font-medium transition-colors">Home</Link>
               <Link to="/about" className="text-slate-700 hover:text-yellow-600 font-medium transition-colors">About Us</Link>
               <Link to="/emi-calculator" className="text-slate-700 hover:text-yellow-600 font-medium transition-colors">EMI Calculator</Link>
-              <Link to="/credit-eligibility" className="text-slate-700 hover:text-yellow-600 font-medium transition-colors">Credit Eligibility</Link>
               <Link to="/contact" className="text-slate-700 hover:text-yellow-600 font-medium transition-colors" aria-current="page">Contact</Link>
             </nav>
             <Button onClick={handleWhatsAppContact} className="bg-green-500 hover:bg-green-600 text-white">
@@ -182,11 +182,8 @@ Please contact me regarding loan services.`;
                     <div>
                       <h3 className="font-semibold text-slate-800 mb-2">Phone Numbers</h3>
                       <div className="space-y-1">
-                        <a href="tel:+919497544143" className="block text-slate-600 hover:text-blue-600">
-                          +91 94975 44143
-                        </a>
-                        <a href="tel:+919746754690" className="block text-slate-600 hover:text-blue-600">
-                          +91 97467 54690
+                        <a href={telHref()} className="block text-slate-600 hover:text-blue-600">
+                          {TEL_NUMBER}
                         </a>
                       </div>
                     </div>
@@ -228,12 +225,6 @@ Please contact me regarding loan services.`;
                     <MessageCircle className="w-4 h-4 mr-2" />
                     Chat on WhatsApp
                   </Button>
-                  
-                  <Link to="/credit-eligibility" className="block">
-                    <Button variant="outline" className="w-full">
-                      Check Loan Eligibility
-                    </Button>
-                  </Link>
                   
                   <Link to="/emi-calculator" className="block">
                     <Button variant="outline" className="w-full">
@@ -286,7 +277,6 @@ Please contact me regarding loan services.`;
                   <Link to="/" className="block text-slate-300 hover:text-yellow-400 transition-colors">Home</Link>
                   <Link to="/about" className="block text-slate-300 hover:text-yellow-400 transition-colors">About Us</Link>
                   <Link to="/emi-calculator" className="block text-slate-300 hover:text-yellow-400 transition-colors">EMI Calculator</Link>
-                  <Link to="/credit-eligibility" className="block text-slate-300 hover:text-yellow-400 transition-colors">Credit Eligibility</Link>
                   <Link to="/contact" className="block text-slate-300 hover:text-yellow-400 transition-colors">Contact</Link>
                 </div>
               </div>

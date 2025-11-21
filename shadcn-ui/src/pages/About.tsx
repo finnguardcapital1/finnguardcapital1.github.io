@@ -2,11 +2,13 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { MessageCircle, Target, Eye, Heart, Users, Award, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import { openWhatsApp, telHref, TEL_NUMBER } from '@/lib/contact';
 
 export default function About() {
   const handleWhatsAppContact = () => {
     const message = "Hi FiNNGUARD Capital! I'd like to know more about your company and services. Please provide me with more information.";
-    window.open(`https://wa.me/919497544143?text=${encodeURIComponent(message)}`, '_blank');
+    openWhatsApp(message);
   };
 
   const values = [
@@ -34,6 +36,12 @@ export default function About() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+      <Helmet>
+        <title>About Us - FiNNGUARD Capital | Loan Services Provider in Thrissur, Kerala</title>
+        <meta name="description" content="Learn about FiNNGUARD Capital's mission, vision, and values. We're a trusted loan facilitation company in Thrissur, Kerala offering home loans, car loans, personal loans, and business loans." />
+        <meta name="keywords" content="about FiNNGUARD Capital, loan company Thrissur, finance provider Kerala, loan services provider" />
+        <link rel="canonical" href="https://finnguardcapital.com/about" />
+      </Helmet>
       {/* Header */}
       <header className="bg-white shadow-lg sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -230,7 +238,7 @@ export default function About() {
               <div className="space-y-2 text-slate-300">
                 <p>17/557E, 2nd Floor, Jayamohan Building,</p>
                 <p>Palappilly Road, Amballur, Thrissur, Kerala - 680302</p>
-                <p>Phone: +91 94975 44143, +91 97467 54690</p>
+                <p>Phone: <a href={telHref()} className="hover:underline">{TEL_NUMBER}</a></p>
                 <p>Email: support@finnguardcapital.com</p>
               </div>
             </div>

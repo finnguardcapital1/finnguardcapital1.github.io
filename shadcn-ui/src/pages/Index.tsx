@@ -12,6 +12,7 @@ import LiveChat from '@/components/LiveChat';
 import ConversionOptimizer from '@/components/ConversionOptimizer';
 import { LazyStatsDashboard, OptimizedImage } from '@/components/PerformanceOptimizer';
 import { trackPageView, trackWhatsAppClick, trackEvent } from '@/lib/analytics';
+import { openWhatsApp, telHref, TEL_NUMBER } from '@/lib/contact';
 import ErrorBoundary from '@/components/ErrorBoundary';
 
 const loanProducts = [
@@ -81,7 +82,7 @@ export default function Index() {
   const handleWhatsAppContact = () => {
     trackWhatsAppClick('header_button');
     const message = "Hi FiNNGUARD Capital! I'm interested in learning more about your loan services. Please provide me with more information.";
-    window.open(`https://web.whatsapp.com/send?phone=919497544143&text=${encodeURIComponent(message)}`, '_blank');
+    openWhatsApp(message);
   };
 
   const handleEMICalculator = () => {
@@ -428,8 +429,7 @@ export default function Index() {
                   <div className="flex items-center space-x-3">
                     <Phone className="w-5 h-5 text-yellow-400" />
                     <div>
-                      <a href="tel:+919497544143" className="hover:text-yellow-400">+91 94975 44143</a>,{' '}
-                      <a href="tel:+919746754690" className="hover:text-yellow-400">+91 97467 54690</a>
+                      <a href={telHref()} className="hover:text-yellow-400">{TEL_NUMBER}</a>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">

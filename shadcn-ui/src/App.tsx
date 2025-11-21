@@ -3,6 +3,7 @@ import { TooltipProvider } from '@/components/ui/tooltip';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+import CookieConsent from './components/CookieConsent';
 import { useEffect } from 'react';
 import Index from './pages/Index';
 import About from './pages/About';
@@ -10,7 +11,7 @@ import EMICalculator from './pages/EMICalculator';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
 import ErrorBoundary from './components/ErrorBoundary';
-import { initGA } from './lib/analytics';
+import { initGA, GA_TRACKING_ID } from './lib/analytics';
 import { usePerformanceMonitoring } from './hooks/usePerformanceMonitoring';
 import { preloadCriticalResources } from './components/PerformanceOptimizer';
 
@@ -28,7 +29,9 @@ const AppContent = () => {
 
   useEffect(() => {
     // Initialize Google Analytics
-    initGA();
+    if (GA_TRACKING_ID && !GA_TRACKING_ID.includes('XXXXXXXX')) {
+      initGA();
+    }
     
     // Preload critical resources
     preloadCriticalResources();
@@ -56,6 +59,7 @@ const App = () => (
       <HelmetProvider>
         <TooltipProvider>
           <Toaster />
+          <CookieConsent />
           <BrowserRouter>
             <AppContent />
           </BrowserRouter>

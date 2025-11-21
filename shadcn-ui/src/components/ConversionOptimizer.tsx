@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { Phone, Mail, MessageCircle, Calendar, Clock, CheckCircle, TrendingUp } from 'lucide-react';
+import { openWhatsApp, openTel } from '@/lib/contact';
 
 interface ConversionEvent {
   type: 'whatsapp' | 'callback' | 'email' | 'form_submit';
@@ -121,7 +122,7 @@ export default function ConversionOptimizer() {
 
   const handleWhatsAppClick = () => {
     const message = selectedVariant?.message || 'Hi! I\'m interested in your loan services.';
-    window.open(`https://wa.me/919497544143?text=${encodeURIComponent(message)}`, '_blank');
+    openWhatsApp(message);
     
     trackConversion({
       type: 'whatsapp',
@@ -144,7 +145,7 @@ export default function ConversionOptimizer() {
 
 Please call me back at the preferred time. Thank you!`;
 
-    window.open(`https://wa.me/919497544143?text=${encodeURIComponent(message)}`, '_blank');
+    openWhatsApp(message);
     
     trackConversion({
       type: 'callback',
@@ -445,7 +446,7 @@ Email: ${emailData.email}
 
       {/* Quick Contact Options */}
       <div className="grid md:grid-cols-3 gap-4">
-        <Card className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => window.open('tel:+919497544143')}>
+        <Card className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => openTel()}>
           <CardContent className="p-4 text-center">
             <Phone className="w-8 h-8 text-blue-600 mx-auto mb-2" />
             <h4 className="font-semibold text-slate-800">Call Now</h4>

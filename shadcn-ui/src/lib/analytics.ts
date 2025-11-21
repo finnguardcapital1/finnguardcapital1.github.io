@@ -6,10 +6,15 @@ declare global {
   }
 }
 
-export const GA_TRACKING_ID = 'G-XXXXXXXXXX'; // Replace with actual GA4 ID
+export const GA_TRACKING_ID = 'G-FH17RVPD5Y'; // Google Analytics 4 Measurement ID
 
-// Initialize Google Analytics
+// Initialize Google Analytics (no-op if GA ID not provided)
 export const initGA = () => {
+  if (!GA_TRACKING_ID || GA_TRACKING_ID.trim() === '' || GA_TRACKING_ID.includes('XXXXXXXX')) {
+    // GA not configured; skip initialization
+    return;
+  }
+
   // Load GA4 script
   const script1 = document.createElement('script');
   script1.async = true;
@@ -29,25 +34,28 @@ export const initGA = () => {
   });
 };
 
+// Expose helper to check if GA is enabled (useful for conditional UI)
+export const isGAEnabled = () => {
+  return !!GA_TRACKING_ID && !GA_TRACKING_ID.includes('XXXXXXXX');
+};
+
 // Track page views
 export const trackPageView = (url: string, title?: string) => {
-  if (typeof window.gtag !== 'undefined') {
-    window.gtag('config', GA_TRACKING_ID, {
-      page_path: url,
-      page_title: title,
-    });
-  }
+  if (!GA_TRACKING_ID || GA_TRACKING_ID.trim() === '' || typeof window.gtag === 'undefined') return;
+  window.gtag('config', GA_TRACKING_ID, {
+    page_path: url,
+    page_title: title,
+  });
 };
 
 // Track events
 export const trackEvent = (action: string, category: string, label?: string, value?: number) => {
-  if (typeof window.gtag !== 'undefined') {
-    window.gtag('event', action, {
-      event_category: category,
-      event_label: label,
-      value: value,
-    });
-  }
+  if (!GA_TRACKING_ID || GA_TRACKING_ID.trim() === '' || typeof window.gtag === 'undefined') return;
+  window.gtag('event', action, {
+    event_category: category,
+    event_label: label,
+    value: value,
+  });
 };
 
 // Track conversions
@@ -55,12 +63,11 @@ export const trackConversion = (conversionType: string, value?: number) => {
   trackEvent('conversion', 'loan_application', conversionType, value);
   
   // Track specific conversion events
-  if (typeof window.gtag !== 'undefined') {
-    window.gtag('event', 'generate_lead', {
-      currency: 'INR',
-      value: value || 0,
-    });
-  }
+  if (!GA_TRACKING_ID || GA_TRACKING_ID.trim() === '' || typeof window.gtag === 'undefined') return;
+  window.gtag('event', 'generate_lead', {
+    currency: 'INR',
+    value: value || 0,
+  });
 };
 
 // Track form submissions

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { MessageCircle, X, Send, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { openWhatsApp, openTel } from '@/lib/contact';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -18,13 +19,13 @@ export default function LiveChat() {
 
   const handleQuickMessage = (message: string) => {
     const whatsappMessage = `Hi FiNNGUARD Capital! ${message}. Please help me with more information.`;
-    window.open(`https://web.whatsapp.com/send?phone=919497544143&text=${encodeURIComponent(whatsappMessage)}`, '_blank');
+    openWhatsApp(whatsappMessage);
     setIsOpen(false);
   };
 
   const handleWhatsAppChat = () => {
     const message = "Hi FiNNGUARD Capital! I'm interested in your loan services. Please help me.";
-    window.open(`https://web.whatsapp.com/send?phone=919497544143&text=${encodeURIComponent(message)}`, '_blank');
+    openWhatsApp(message);
     setIsOpen(false);
   };
 
@@ -32,7 +33,7 @@ export default function LiveChat() {
     if (!customMessage.trim()) return;
     
     const whatsappMessage = `Hi FiNNGUARD Capital! ${customMessage}`;
-    window.open(`https://web.whatsapp.com/send?phone=919497544143&text=${encodeURIComponent(whatsappMessage)}`, '_blank');
+    openWhatsApp(whatsappMessage);
     setCustomMessage('');
     setIsOpen(false);
   };
@@ -44,7 +45,7 @@ export default function LiveChat() {
   };
 
   const handleCall = () => {
-    window.open('tel:+919497544143');
+    openTel();
   };
 
   return (

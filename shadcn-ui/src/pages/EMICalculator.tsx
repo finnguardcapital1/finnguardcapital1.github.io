@@ -5,7 +5,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { MessageCircle, Calculator, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import AdvancedCalculatorSuite from '@/components/AdvancedCalculatorSuite';
+import { openWhatsApp, telHref, TEL_NUMBER } from '@/lib/contact';
 
 export default function EMICalculator() {
   const [showAdvanced, setShowAdvanced] = useState(false);
@@ -47,12 +49,18 @@ Total Interest: ₹${result.totalInterest.toLocaleString()}
 
 I'm interested in applying for this loan. Please contact me.`;
 
-      window.open(`https://wa.me/919497544143?text=${encodeURIComponent(message)}`, '_blank');
+      openWhatsApp(message);
     }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+      <Helmet>
+        <title>EMI Calculator - FiNNGUARD Capital | Calculate Your Monthly Loan EMI</title>
+        <meta name="description" content="Use our free EMI calculator to calculate your monthly loan payment. Plan your finances for home loans, car loans, personal loans and more with FiNNGUARD Capital." />
+        <meta name="keywords" content="EMI calculator, loan EMI calculator, monthly EMI, loan payment calculator, FiNNGUARD Capital" />
+        <link rel="canonical" href="https://finnguardcapital.com/emi-calculator" />
+      </Helmet>
       {/* Header */}
       <header className="bg-white shadow-lg sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -65,7 +73,7 @@ I'm interested in applying for this loan. Please contact me.`;
             <Link to="/emi-calculator" className="text-slate-700 hover:text-yellow-600 font-medium transition-colors">EMI Calculator</Link>
             <Link to="/contact" className="text-slate-700 hover:text-yellow-600 font-medium transition-colors">Contact</Link>
           </nav>
-          <Button onClick={() => window.open('https://wa.me/919497544143', '_blank')} className="bg-green-500 hover:bg-green-600 text-white">
+          <Button onClick={() => openWhatsApp("Hi FiNNGUARD Capital! I'm interested in your loan services.")} className="bg-green-500 hover:bg-green-600 text-white">
             <MessageCircle className="w-4 h-4 mr-2" />
             WhatsApp
           </Button>
@@ -261,7 +269,7 @@ I'm interested in applying for this loan. Please contact me.`;
               <h3 className="text-lg font-semibold mb-4">Contact Info</h3>
               <div className="space-y-2 text-slate-300">
                 <p>17/557E, 2nd Floor, Jayamohan Building, Palappilly Road, Amballur, Thrissur, Kerala - 680302</p>
-                <p>Phone: +91 94975 44143, +91 97467 54690</p>
+                <p>Phone: <a href={telHref()} className="hover:underline">{TEL_NUMBER}</a></p>
                 <p>Email: support@finnguardcapital.com</p>
               </div>
             </div>

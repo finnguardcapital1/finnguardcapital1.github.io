@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
+import { openWhatsApp, openTel } from '@/lib/contact';
 
 const faqData = [
   {
@@ -197,13 +198,13 @@ export default function FAQ() {
               <p className="text-slate-600 mb-6">Our loan experts are here to help you find the right lending partner for your needs</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button
-                  onClick={() => window.open('https://web.whatsapp.com/send?phone=919497544143&text=Hi! I have some questions about your loan facilitation services. Please help me.', '_blank')}
+                  onClick={() => openWhatsApp('Hi! I have some questions about your loan facilitation services. Please help me.')}
                   className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
                 >
                   Chat on WhatsApp
                 </button>
                 <button
-                  onClick={() => window.open('tel:+919497544143')}
+                  onClick={() => openTel()}
                   className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
                 >
                   Call Us Now

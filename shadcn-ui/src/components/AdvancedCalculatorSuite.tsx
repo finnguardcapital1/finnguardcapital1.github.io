@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { Calculator, TrendingUp, PiggyBank, Building, MessageCircle } from 'lucide-react';
+import { openWhatsApp } from '@/lib/contact';
 
 interface LoanOption {
   bank: string;
@@ -232,7 +233,7 @@ Contact us for personalized loan solutions!`;
         break;
     }
 
-    window.open(`https://wa.me/919497544143?text=${encodeURIComponent(message)}`, '_blank');
+    openWhatsApp(message);
   };
 
   return (

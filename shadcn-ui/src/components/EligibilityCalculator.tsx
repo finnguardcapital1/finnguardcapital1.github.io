@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { MessageCircle, Calculator, CheckCircle, XCircle } from 'lucide-react';
+import { openWhatsApp } from '@/lib/contact';
 
 interface EligibilityResult {
   eligible: boolean;
@@ -121,8 +122,8 @@ Interest Rate: ${result.interestRate}%
 
 Please help me proceed with the loan application.`;
 
-    // Fixed WhatsApp Web URL format for proper message pre-filling
-    window.open(`https://web.whatsapp.com/send?phone=919497544143&text=${encodeURIComponent(message)}`, '_blank');
+    // Use centralized WhatsApp helper
+    openWhatsApp(message);
   };
 
   return (

@@ -8,6 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Phone, Mail, MessageCircle, Calendar, User, DollarSign, Briefcase, Star } from 'lucide-react';
+import { openWhatsApp, openTel } from '@/lib/contact';
 
 interface LeadData {
   personalInfo: {
@@ -175,8 +176,8 @@ ${leadScore.factors.map(factor => `• ${factor}`).join('\n')}
 
 Priority: ${leadScore.category} Lead - Handle accordingly!`;
 
-    // Send to WhatsApp
-    window.open(`https://wa.me/919497544143?text=${encodeURIComponent(message)}`, '_blank');
+    // Send to WhatsApp using centralized helper
+    openWhatsApp(message);
 
     // Store lead data (in real implementation, send to CRM/database)
     localStorage.setItem('leadData', JSON.stringify(leadInfo));
@@ -243,7 +244,7 @@ Priority: ${leadScore.category} Lead - Handle accordingly!`;
             <Button onClick={() => {setIsSubmitted(false); setCurrentStep(1);}} variant="outline">
               Submit Another Application
             </Button>
-            <Button onClick={() => window.open('tel:+919497544143')}>
+            <Button onClick={openTel}>
               <Phone className="w-4 h-4 mr-2" />
               Call Us Now
             </Button>
