@@ -1,0 +1,5 @@
+node_modules/
+workspace/shadcn-ui/node_modules/
+workspace/shadcn-ui/dist/
+.vite/
+workspace/shadcn-ui/.vite/
