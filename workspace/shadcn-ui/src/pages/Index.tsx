@@ -29,7 +29,7 @@ export default function Index() {
         <header className="bg-white shadow-lg sticky top-0 z-50">
           <div className="container mx-auto px-4 py-4 flex justify-between items-center">
             <div className="flex items-center space-x-3">
-              <img src="/assets/logo.png" alt="FiNNGUARD Capital" className="h-12 w-auto" />
+              <img src="/assets/logo.png?v=1" alt="FiNNGUARD Capital" className="h-12 w-auto" />
             </div>
             <nav className="hidden md:flex space-x-8" role="navigation" aria-label="Main navigation">
               <Link to="/" className="text-slate-700 hover:text-yellow-600 font-medium transition-colors" aria-current="page">Home</Link>
@@ -47,7 +47,7 @@ export default function Index() {
           <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url(/assets/herobanner.png)' }}></div>
           <div className="relative z-10 container mx-auto">
             <div className="mb-8">
-              <img src="/assets/logo_alt.png" alt="FiNNGUARD Capital" className="h-20 w-auto mx-auto mb-6" />
+              <img src="/assets/logo_alt.png?v=1" alt="FiNNGUARD Capital" className="h-20 w-auto mx-auto mb-6" />
             </div>
             <h1 className="text-5xl md:text-6xl font-bold text-black mb-6">Your Trusted Finance Partner</h1>
             <p className="text-xl md:text-2xl text-black/90 mb-4">Simplified loan solutions for all your financial needs in Thrissur, Kerala</p>
@@ -67,7 +67,7 @@ export default function Index() {
           <div className="container mx-auto">
             <div className="grid md:grid-cols-3 gap-8">
               <div>
-                <img src="/assets/logo.png" alt="FiNNGUARD Capital" className="h-12 w-auto mb-4" />
+                <img src="/assets/logo.png?v=1" alt="FiNNGUARD Capital" className="h-12 w-auto mb-4" />
                 <p className="text-slate-300 mb-4">Your Financial Goals, Our Commitment</p>
               </div>
               <div>
